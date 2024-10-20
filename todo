@@ -1,0 +1,67 @@
+1. 파싱(주변광, 카메라, 빛, 구체, 평면, 원기둥)
+	가. 물체(구체, 평면, 원기둥) 따로 빛(주변광, 빛) 따로 카메라(시점) 따로
+	나. 주변광
+		구분자, 주변광 비율(0.0 ~ 1.0), RGB
+	다. 시점
+		구분자, 좌표, 축회전, 수평정도?(소실점 이런건가)
+	라. 빛
+		구분자, 좌표, 밝기비율(0.0 ~ 1.0), RGB(mand 안씀)
+	마. 구체
+		구분자, 좌표, 지름, RGB
+	바. 평면
+		구분자, 좌표, 축회전, RGB
+	사. 원기둥
+		구분자, 좌표, 지름, 높이, RGB
+2. 물체(평면, 구체, 원기둥) 화면에 표시
+3. 빛, 주변광 표시
+4. 그림자 계산
+5. 반사광 표시
+
+~ 해야 할 일 ~
+
+I. 파싱
+	1. 인자로 .rt 파일이 들어오는지 확인
+	2. .rt 파일 open 하고 gnl로 한 줄 읽고 ft_split_s 함수로 whitespace(개행 제외) set 을 기준으로 파싱
+	3. 구분자를 strncmp를 사용하여 널 문자까지 검사. 각 값에 따라서 적절하게 인자 파싱
+
+II. 월드 변환
+	1. 카메라를 원점(0, 0, 0)으로 만들기 위해 좌표 이동
+	2. 그 후 전체 행렬 회전시킴
+	3. 각 object에 대한 식 회전 
+		a. 원 : (x - Cx) ^ 2 + (y - Cy) ^ 2 + (z - Cz) ^ 2 = r ^ 2
+		b. 평면 : Normal_Vec * (r - R0) = 0
+		c. 원기둥 : (x - h) ^ 2 + (y - k) ^ 2, z1 < z < z2
+
+III. 레이 트레이싱
+	1. 화면을 구성하고 있는 각 픽셀에 레이를 쏜 후 튕겨나오는 값에 따라서 결정한다.
+	
+
+github convention :			https://velog.io/@shin6403/Git-git-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
+							https://velog.io/@msung99/Git-Commit-Message-Convension
+
+scenario of github flow :	https://velog.io/@taeate/Github-flow-%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4
+
+~ How to use Github Flow ~
+
+1. 이슈를 등록한다.
+	issue는 해야 할 일을 등록하며 꼭 본인이 해야 할 일이 아닐 수도 있다.
+	title, detail, assignees, label 설정
+2. 이슈 할당을 한다.
+3. feature-{이슈 번호} 브랜치를 만든다.
+	git branch -c {브랜치 이름} : 브랜치 생성
+	git branch -d {브랜치 이름} : 브랜치 삭제
+	git switch {브랜치 이름} : 현재 작업할 브랜치를 새로운 브랜치로 변경
+4. feature 파일을 추가하고 커밋을 한다.
+5. feature 브랜치를 원격 저장소에 push 한다.
+	git push origin {브랜치 이름} : 브랜치로 push
+6. Github에 푸시 된 feature-{이슈 번호} 브랜치를 Pull Request 한다.
+	pull request : 사용자가 원격 저장소에 push 하여 새로운 사항이 적용되었을 경우, 다른 사용자에게 push된 상황을 알리는 것을 말함.
+7. Github에서 코드 리뷰를 한다.
+8. Github에서 Merge 한다.
+9. 로컬 저장소에서 원격 저장소에 Merge 된 내용을 Pull한다.
+
+hb
+center
+normal
+scaler > 0
+rgb

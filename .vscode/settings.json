@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"mlx_utils_bonus.h": "c",
+		"minirt_bonus.h": "c",
+		"vec_bonus.h": "c",
+		"complex": "c"
+	}
+}
